@@ -53,9 +53,31 @@ def nums_in_sequence(ndarray:list[list], sequence:list[int], axis:str) -> bool:
                    ((axis == 'y') and (matches == dimensions['y_axis'])) \
                 else False
 
+# seq = [2, 5, 8, 11]
+# print(nums_in_sequence(nums, seq, 'y'))
+# print('\n=============================================================\n')
+# seq_2 = [7, 7, 9]
+# print(nums_in_sequence(nums, seq_2, 'x'))
 
-seq = [2, 5, 8, 11]
-print(nums_in_sequence(nums, seq, 'y'))
-print('\n=============================================================\n')
-seq_2 = [7, 7, 9]
-print(nums_in_sequence(nums, seq_2, 'x'))
+
+def mark_bingo_numbers(ndarray:list, sequence:list[str]) -> list[str]:
+    '''Mark every number from lst present in sequence analyzed linerly.'''
+    for seq_num in sequence: # Iterate over each num in sequence, marking each equal num in ndarray
+        seq_num = str(seq_num)
+        # print(seq_num)
+        for board in ndarray: # Iterate over each bingo board.
+            for row in range(len(board)): # Iterate over each row index in bingo board.
+                index = 0
+                while index < len(ndarray[row]): # Iterate over each number in row, marking the numbers equals to current num in sequence.
+                    num = str(ndarray[row][index])
+                    print(num)
+                    if num == seq_num:
+                        ndarray[row][index] = num + '!'
+                        print(ndarray[row][index])
+                    index += 1
+    print(ndarray)
+    return ndarray
+
+sequence = [4, 9, 12, 2]
+mark_bingo_numbers(nums, sequence)
+    
