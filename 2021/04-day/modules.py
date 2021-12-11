@@ -8,7 +8,6 @@ def multi_array_generator(size:int) -> list:
     while i < size:
         nd_array.append([])
         i += 1
-    # print(nd_array)
     return nd_array 
 
 
@@ -31,129 +30,65 @@ def bingo_board_generator(file_path:str) -> list[list[list[str]]]:
             index += 1
         if index == len(board_list):
             break
-    # print(f'Board  1: {board_list[0]}')
-    # print(f'Board  1: {type(board_list[0][0][0])}')
-    # print(f'Board  2: {board_list[1]}')
-    # print(f'Board  3: {board_list[2]}') 
-    # print(row_list)
-    # print(board_list)
     return board_list
 
 
-# def locate_winner_board(tensor:list[list[list[str]]]) -> int or bool:
-#     '''If a winner bingo board was found, return his index. Otherwise return bool 'False'.'''
-#     dimensions = {
-#         'x_axis': len(tensor[0]),
-#         'y_axis': len(tensor)
-#     }
-#     print('X axis: ',dimensions['x_axis'])
-#     print('Y axis: ',dimensions['y_axis'])
-#     input('Enter to continue')
-#     matches = 0
-#     for board_index, board in enumerate(tensor):  # Iterate over each bingo board in tensor.
-#         # Horizontal iteration on x axis in current board (regular iteration)
-#         for row in enumerate(board): # Iterate over each row index in current bingo board.
-#             # print(f'Matches: {matches}')
-#             for num in enumerate(row): # Iterate over each num in current row.
-#                 if not num[-1] == '!':
-#                     matches = 0
-#                     break
-#                 matches += 1
-#             if matches == dimensions['x_axis']: # Return the location of the winner board if all numbers in row are marked.
-#                 print(tensor[board_index])
-#                 return tensor.index(tensor[board_index])
-#         # Vertical iteration on y axis in current board (by index)   
-#         x_index = 0 # Control what index to target in the board row's (horizontal position).
-#         y_index = 0 # Control what row to target in the board (vertical position).
-#         while (x_index < dimensions['x_axis']) and (y_index < dimensions['y_axis']): # Iterate vertically in numbers from index
-#             for num_index, num in enumerate(tensor[board_index][y_index][x_index]):
-#                 # print(f'Current iteration: {tensor[y_index][x_index]}')
-#                 if not tensor[board_index][y_index][x_index][num_index][-1] == '!': # Go to next bingo board column if current number is not marked.
-#                     matches = 0
-#                     y_index = 0
-#                     x_index += 1
-#                     continue
-#                 # print(f'Number {tensor[y_index][x_index]} IN sequence!')
-#                 # print('Before:',matches)
-#                 y_index += 1
-#                 matches += 1
-#                 if matches == dimensions['y_axis']: # Return the location of the winner board if all numbers in column are marked.
-#                     print(tensor[board_index])
-#                     return tensor.index(tensor[board_index])
-#     return False
+def get_winner_board(tensor:list, sequence:list[str]) -> tuple:
+    '''Return a tuple with the winner bingo board index and the last marked number.
+       1. The function marks every number in each board from tensor present in sequence (one by one).
+       2. Checks if any bingo board wins with the inner function.
+       3. Repeat the process with the next sequence number until a winner bingo board is found.'''
 
-
-def get_winner_board(tensor:list, sequence:list[str]) -> list[str]:
-    '''Return the winner bingo board index. First the function marks every number
-       from tensor present in sequence (analyzed linerly) and finally checks if any
-       bingo board wins.'''
-    
-    
-    def locate_winner_board(tensor:list[list[list[str]]]) -> int or bool:
-        '''If a winner bingo board was found, return his index. Otherwise return bool 'False'.'''
+    def locate_winner_board(tensor:list[list[list[str]]]) -> int or str:
+        '''If a winner bingo board was found, return his index. Otherwise return string "Winner board not found".'''
         dimensions = {
             'x_axis': len(tensor[0][0]),
             'y_axis': len(tensor[0])
         }
-        # print('X axis: ',dimensions['x_axis'])
-        # print('Y axis: ',dimensions['y_axis'])
-        # input('Enter to continue')
-        print('==================BEGIN TO LOCATE WINNER BOARD==================')
         matches = 0
         for board_index, board in enumerate(tensor):  # Iterate over each bingo board in tensor.
             # Horizontal iteration on x axis in current board (regular iteration)
-            for row in enumerate(board): # Iterate over each row index in current bingo board.
-                # print(f'Matches: {matches}')
-                for num in enumerate(row): # Iterate over each num in current row.
+            for row_index, row in enumerate(board): # Iterate over each row index in current bingo board.
+                for num_index, num in enumerate(row): # Iterate over each num in current row.
                     if not num[-1] == '!':
                         matches = 0
                         break
                     matches += 1
                 if matches == dimensions['x_axis']: # Return the location of the winner board if all numbers in row are marked.
-                    print(tensor[board_index])
                     return tensor.index(tensor[board_index])
             # Vertical iteration on y axis in current board (by index)   
             x_index = 0 # Control what index to target in the board row's (horizontal position).
             y_index = 0 # Control what row to target in the board (vertical position).
-            while (x_index < dimensions['x_axis']) and (y_index < dimensions['y_axis']): # Iterate vertically in numbers from index
-                print(f'======================== BEGIN VERTICAL ITERATION {x_index} =========================')
-                for num in tensor[board_index][y_index]:
-                    # print(f'Current iteration: {tensor[y_index][x_index]}')
-                    print(f'=============== {tensor[board_index][y_index][x_index]} ==============')
-                    if not tensor[board_index][y_index][x_index][-1] == '!': # Go to next bingo board column if current number is not marked.
-                        matches = 0
-                        y_index = 0
-                        x_index += 1
-                        continue
-                    # print(f'Number {tensor[y_index][x_index]} IN sequence!')
-                    # print('Before:',matches)
-                    y_index += 1
+            while ((x_index < dimensions['x_axis']) and (y_index < dimensions['y_axis'])): # Iterate vertically in numbers from index
+                if not tensor[board_index][y_index][x_index][-1] == '!': # Go to next bingo board column if current number is not marked.
+                    matches = 0
+                    y_index = 0
+                    x_index += 1
+                    continue
+                else:
                     matches += 1
-                    if matches == dimensions['y_axis']: # Return the location of the winner board if all numbers in column are marked.
-                        print(tensor[board_index])
+                    if matches == dimensions['y_axis']: # Return the location and last marked number if all numbers in column are marked.
+                        print(f'\nWINNER BOARD:\n{tensor[board_index]}')
                         return tensor.index(tensor[board_index])
-        return False
+                y_index += 1
+        return 'Winner board not found'
 
-
-    # Begin to mark the announced numbers from sequence
+    # Announce the first number in sequence, mark all numbers in all boards equal
+    # to current sequence num and checks if a winner board exist after five iteration.
+    # Repeat the process with each sequence number until get a winner board. 
     iterations = 0
-    result = None
-    for seq_num in sequence: # Iterate over each num in sequence, marking each equal num in tensor
-        seq_num = str(seq_num)
-        # print(seq_num)
+    for seq_num in sequence: # Iterate over each num in sequence, marking each equal num in tensor.
         for board_index, board in enumerate(tensor): # Iterate over each bingo board.
             for row_index in range(len(board)): # Iterate over each row index in bingo board.
                 num_index = 0
-                while num_index < len(tensor[board_index][row_index]): # Iterate over each number in row, marking the numbers equals to current num in sequence.
-                    num = str(tensor[board_index][row_index][num_index])
-                    print(num)
+                while num_index < len(tensor[board_index][row_index]): # Iterate over each number in row, marking the
+                    num = tensor[board_index][row_index][num_index]    # numbers equals to current num in sequence.
                     if num == seq_num:
                         tensor[board_index][row_index][num_index] = num + '!'
-                        print(tensor[board_index][row_index][num_index])
                     num_index += 1
-        if iterations > 4: # After mark all numbers equals to current sequence num, checks if any board wins.
-            result = locate_winner_board(tensor)
-            if result:
-                return result
+        if iterations > 3: # After mark all numbers equals to current sequence num, checks if any board wins.
+            winner_board_index = locate_winner_board(tensor)
+            if not winner_board_index == 'Winner board not found':
+                return (winner_board_index, int(seq_num))
         iterations += 1
     return False
