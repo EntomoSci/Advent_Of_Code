@@ -1,0 +1,13 @@
+1. Transform the input to a Python Data Structure
+    1.1 Iterate over each line free of '\n' characters in the file object.
+    1.2 Cut each line in ' -> ' and create a tuple with the resulting strings
+        in 2 tuples each splited in ','.
+    1.3 Add the new tuple to a list with all coordinates.
+
+2. Create the dots map (<function create_dots_map>)
+    2.1 Create a function to generate a 2D array filled with 'y' arrays and
+        each array filled with 'x' dots.
+    2.2 Find the largest 'x' and 'y' coordinate from the coordinates list.
+    2.3 Using <create_dots_map> function create a 2D array filled with 'y' arrays
+        (using the largest 'y' coordinate) and each array filled with 'x' dots
+        (using the largest 'x' coordinate).
