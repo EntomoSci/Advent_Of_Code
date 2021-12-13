@@ -7,7 +7,8 @@
 2. Create the dots map (<function create_dots_map>)
     2.1 Create a function to generate a 2D array filled with 'y' arrays and
         each array filled with 'x' dots.
-    2.2 Find the largest 'x' and 'y' coordinate from the coordinates list.
-    2.3 Using <create_dots_map> function create a 2D array filled with 'y' arrays
+    2.2 Using (<function find_largest_coordinate>) find the largest 'x' and 'y'
+        coordinate from the coordinates list.
+    2.3 Using the 2 functions, create a 2D array filled with 'y' arrays
         (using the largest 'y' coordinate) and each array filled with 'x' dots
         (using the largest 'x' coordinate).
