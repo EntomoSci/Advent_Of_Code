@@ -28,3 +28,51 @@ def find_largest_coordinate(sequence: list) -> tuple:
                 largest_y = y
 
     return (largest_x, largest_y)
+
+
+def mark_coordinates(coords_list:list, dots_map:list) -> list:
+    '''Return a new dots map marked with the coordinates
+       x1,y1 to x2,y2 from coords_list.'''
+
+    new_dots_map = list(dots_map)
+    for coords in coords_list:
+        x1_coord = int(coords[0][0])
+        y1_coord = int(coords[0][1])
+        x2_coord = int(coords[1][0])
+        y2_coord = int(coords[1][1])
+
+        # Sort in ascending order the coordinates from x1,x2 and y1,y2.
+        sorted_coords = None
+        if x1_coord == x2_coord: # The vent line is vertical.
+            sorted_coords = tuple(sorted([y1_coord, y2_coord]))
+        elif y1_coord == y2_coord: # The vent line is horizontal.
+            sorted_coords = tuple(sorted([x1_coord, x2_coord]))
+        
+        # Use a range of coordinates x1,x2 or y1,y2 (depending of the
+        # orientation of the vent line) to mark the positions.
+        line_range = tuple(range(sorted_coords[0], sorted_coords[1] + 1))
+
+        for point in line_range:
+            # Vertical vent line marks.
+            if x1_coord == x2_coord:
+                if new_dots_map[point][x1_coord] == '.':
+                    new_dots_map[point][x1_coord] = 1
+                else:
+                    new_dots_map[point][x1_coord] += 1        
+            # Horizontal vent line marks.
+            elif y1_coord == y2_coord:
+                if new_dots_map[y1_coord][point] == '.':
+                    new_dots_map[y1_coord][point] = 1
+                else:
+                    new_dots_map[y1_coord][point] += 1
+
+    return new_dots_map
+
+# coords = [
+#     ((0, 0),(0, 1)),
+#     ((0, 0),(1, 0)),
+#     ((1, 2),(2, 2)),
+# ]
+# dots_map_1 = create_dots_map(3, 3)
+# new_map = mark_coordinates(coords, dots_map_1)
+# print(new_map)

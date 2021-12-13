@@ -12,3 +12,7 @@
     2.3 Using the 2 functions, create a 2D array filled with 'y' arrays
         (using the largest 'y' coordinate) and each array filled with 'x' dots
         (using the largest 'x' coordinate).
+
+3. Mark the points using the coordinates
+    3.1 Create a function to mark a dots map (data structure created in step 2)
+        with the coordinates passed (data structure created in step 1).
