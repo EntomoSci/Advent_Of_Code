@@ -21,8 +21,8 @@ def main():
     largest_x, largest_y = find_largest_coordinate(vent_lines)
     dots_map = create_dots_map(largest_x, largest_y)
 
-    # Count points above 1 in the dots map.
-    dots_map_marked = mark_coordinates(vent_lines, dots_map)
+    # Count the points above 1 in the dots map.
+    dots_map_marked = mark_coordinates(vent_lines, dots_map, True)
     points_above_1 = 0
     for row in dots_map_marked:
         for point in row:
@@ -31,6 +31,16 @@ def main():
             if point > 1:
                 points_above_1 += 1
     
+    # print(f'\n{dots_map_marked[0]}')
+    # print(f'{dots_map_marked[1]}')
+    # print(f'{dots_map_marked[2]}')
+    # print(f'{dots_map_marked[3]}')
+    # print(f'{dots_map_marked[4]}')
+    # print(f'{dots_map_marked[5]}')
+    # print(f'{dots_map_marked[6]}')
+    # print(f'{dots_map_marked[7]}')
+    # print(f'{dots_map_marked[8]}')
+    # print(f'{dots_map_marked[9]}\n')
     print(f'POINTS ABOVE 1: {points_above_1}')
     return points_above_1
 
