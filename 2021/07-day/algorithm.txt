@@ -1,0 +1,8 @@
+Algorithm 1:
+    1. Convert the input into an iterable and count each number using a dictionary.
+    2. Get the number with largest appearances and use that number as the crab's meeting point.
+    3. Get the fuel cost of each crab submarine doing this operation:
+       - Rest the current number by the meeting point number if first is greater than the second.
+         Otherwise rest the meeting point number by the current number.
+       - Add each result into a variable.
+    4. Return the total fuel cost variable as the puzzle answer.
