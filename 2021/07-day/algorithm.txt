@@ -8,3 +8,8 @@ Algorithm 1:
        - Multiply that result by the amount of crabs in that position (current key).
        - Add each result into a variable.
     4. Return the total fuel cost variable as the puzzle answer.
+
+Algorithm 2:
+    1. Get the middle value of the positions. 
+    2. Calculate the difference between each position and the middle position. 
+    3. Sum all differences. The result should be the chepeast fuel cost. 
