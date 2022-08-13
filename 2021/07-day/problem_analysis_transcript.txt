@@ -1,0 +1,3 @@
+The script works for the sample input, but not for the real one.
+This means that the crabs no necessary lost lower fuel traveling
+to the position with a high amount of crabs.

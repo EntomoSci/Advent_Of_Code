@@ -1,0 +1,15 @@
+Algorithm 1:
+    1. Convert the input into an iterable and count each number using a dictionary.
+    2. Get the number with largest appearances and use that number as the crab's meeting point.
+    3. Get the fuel cost of each crab submarine doing this operation:
+       - Rest the current horizontal position number (key) by the meeting point number
+         (key with largest amount of crabs) if first is greater than second.
+         Otherwise rest largest key by the current key.
+       - Multiply that result by the amount of crabs in that position (current key).
+       - Add each result into a variable.
+    4. Return the total fuel cost variable as the puzzle answer.
+
+Algorithm 2:
+    1. Get the middle value of the positions. 
+    2. Calculate the difference between each position and the middle position. 
+    3. Sum all differences. The result should be the chepeast fuel cost. 
